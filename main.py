@@ -4,8 +4,8 @@ table = [[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," 
 col = 13
 row = 6
 l = len(table)
-x = 'x' #colored('x', 'red')
-o = 'o' #colored('o', 'yellow')
+x = colored('x', 'red')
+o = colored('o', 'yellow')
 
 
 def win(tab,play):
@@ -18,6 +18,58 @@ def win(tab,play):
                     print("You win")
                     return True
             if tab[s][six] != play:
+                count = 0
+def wino(tab,play):
+    start = 0
+    end = 4
+    for master in range(4):
+        for it in range(5, 2, -1):
+            temp = it
+            count = 0
+            for i in range(start, end):
+                if tab[temp][i] == play:
+                    count += 1
+                    if count == 4:
+                        print("You win")
+                        return True
+                if tab[temp][i] != play:
+                    count = 0
+                temp -= 1
+
+        start += 1
+        end += 1
+
+def winy(tab,play):
+    start = 6
+    end = 2
+    for master in range(3):
+        for it in range(5, 2, -1):
+            temp = it
+            count = 0
+            for i in range(start, end,-1):
+                if tab[temp][i] == play:
+                    count += 1
+                    if count == 4:
+                        print("You win")
+                        return True
+                if tab[temp][i] != play:
+                    count = 0
+
+                temp -= 1
+
+        start -= 1
+        end -= 1
+
+def winline(tab,play):
+    for horizontal in range(6):
+        count = 0
+        for line in range(7):
+            if tab[horizontal][line] == play:
+                count += 1
+                if count == 4:
+                    print("You win")
+                    return True
+            if tab[horizontal][line] != play:
                 count = 0
 
 def showfour(tbl):
@@ -47,8 +99,15 @@ while(True):
         showfour(table)
         player = 2
         print(" Changing player ... " + str(player))
-        if (win(table,o)):
+        if win(table,o):
             break
+        if wino(table,o):
+            break
+        if winy(table,o):
+            break
+        if winline(table,o):
+            break
+
 
     if(player == 2):
         print("Player 2 is playing")
@@ -60,14 +119,11 @@ while(True):
         showfour(table)
         player = 1
         print(" Changing player ... " + str(player))
-        if (win(table,x)):
+        if win(table,o):
             break
-
-#Define a function
-#On lui donnes un caractère et une colonne
-#Il verfifie si il y a une suite de quatre
-
-
-
-
-
+        if wino(table,o):
+            break
+        if winy(table,o):
+            break
+        if winline(table,o):
+            break
